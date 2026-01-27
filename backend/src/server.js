@@ -11,6 +11,10 @@ import searchRoutes from './routes/searchRoutes.js'
 import followRoutes from './routes/followRoutes.js'
 import notificationRoutes from './routes/notificationRoutes.js'
 
+import http from 'http'
+import {Server} from 'socket.io'
+import jwt from 'jsonwebtoken'
+
 dotenv.config()
 
 const app = express()
@@ -35,6 +39,39 @@ app.get('/api/protected', protect, (req, res) => {
 app.get('/', (req, res) => {
   res.send('API is running')
 })
+
+
+const server = http.createServer(app)
+
+export const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST']
+  }
+})
+
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token
+  if (!token) return next(new Error('No token'))
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    socket.userId = decoded.userId
+    next()
+  } catch (error) {
+    next(new Error('Invalid token'))
+  }
+})
+
+io.on('connection', (socket) => {
+  console.log('User connected', socket.userId)
+  socket.join(socket.userId)
+
+  socket.on('disconnect', () => {
+    console.log('User disconnect:', socket.userId)
+  })
+})
+
 
 async function start() {
   try {

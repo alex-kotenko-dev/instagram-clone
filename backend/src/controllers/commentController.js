@@ -1,6 +1,7 @@
 import Comment from '../models/commentModel.js'
 import Post from '../models/postModel.js'
 import Notification from '../models/notificationModel.js'
+import { io } from '../server.js'
 
 
 const commentPost = async (req, res) => {
@@ -18,15 +19,17 @@ const commentPost = async (req, res) => {
     })
 
     if (post.user.toString() !== req.user.userId) {
-      await Notification.create({
+      const notification = await Notification.create({
         user: post.user,
         fromUser: req.user.userId,
         type: 'comment',
         post: post._id
     })
+
+      io.to(post.user.toString()).emit("new_notification", notification)
     }
 
-    res.status(201).json(post)
+    res.status(201).json(comment)
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: "Server Error" })
@@ -53,13 +56,18 @@ const commentPost = async (req, res) => {
       return res.status(404).json({message: 'Comment not found'})
     }
 
-    if (comment.user.toString() !== req.user.userId) {
+    const post = await Post.findById(comment.post)
+
+    if (
+      comment.user.toString() !== req.user.userId &&
+      post.user.toString() !== req.user.userId
+    ) {
       return res.status(403).json({message: 'Not allowed'})
     } 
 
-    if (comment.user.toString() !== req.user.userId && post.user.toString() !== req.user.userId) {
-      return res.status(403).json({message: 'Not allowed'})
-    }
+    await comment.deleteOne()
+
+    res.status(200).json({message: 'Comment deleted'})
   } catch (error) {
       console.error(error)
       res.status(500).json({message: 'Server Error'})

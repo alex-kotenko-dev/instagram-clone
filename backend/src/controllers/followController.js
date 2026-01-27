@@ -1,13 +1,15 @@
 import Follow from '../models/followModel.js'
 import User from '../models/userModel.js'
 import Notification from '../models/notificationModel.js'
+import { io } from '../server.js'
+
 
 const followUser = async (req, res) => {
   try {
     const followerId = req.user.userId
     const followingId = req.params.id
 
-    if (followerId === followingId) {
+    if (followerId.toString() === followingId.toString()) {
       return res.status(400).json({message: 'You cannot follow yourself'})
     }
 
@@ -32,11 +34,13 @@ const followUser = async (req, res) => {
 
     await follow.save()
 
-    await Notification.create({
+    const notification = await Notification.create({
       user: followingId,
       fromUser: followerId,
       type: 'follow'
     })
+     
+    io.to(followingId.toString()).emit("new_notification", notification)
 
     res.status(201).json({message: 'Followed successfully'})
   } catch (error) {

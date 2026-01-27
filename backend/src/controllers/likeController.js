@@ -1,7 +1,7 @@
 import Like from '../models/likeModel.js'
 import Post from '../models/postModel.js'
 import Notification from '../models/notificationModel.js'
-
+import { io } from '../server.js'
 
 
  const likePost = async (req, res) => {
@@ -26,12 +26,14 @@ import Notification from '../models/notificationModel.js'
     })
 
     if (post.user.toString() !== userId) {
-      await Notification.create({
+      const notification = await Notification.create({
         user: post.user, 
         fromUser: userId,
         type: "like",
         post: postId
       })
+
+      io.to(post.user.toString()).emit('new_notification', notification)
     }
 
     res.status(200).json(like)
