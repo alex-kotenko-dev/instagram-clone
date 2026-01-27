@@ -1,20 +1,40 @@
 import Like from '../models/likeModel.js'
+import Post from '../models/postModel.js'
+import Notification from '../models/notificationModel.js'
+
 
 
  const likePost = async (req, res) => {
   try {
-    const post = await Like.findById(req.params.id)
+    const postId = req.params.id
+    const userId = req.user.userId
+
+    const post = await Post.findById(postId)
 
     if (!post) {
       return res.status(404).json({ message: 'Post not found' })
     }
     
-    if (!post.likes.includes(req.user.userId)) {
-      post.likes.push(req.user.userId)
-      await post.save()
+    const existingLike = await Like.findOne({post: postId, user: userId})
+    if (existingLike) {
+      return res.status(400).json({message: 'You already liked this post'})
     }
 
-    res.status(200).json(post)
+    const like = await Like.create({
+      user: userId,
+      post: postId
+    })
+
+    if (post.user.toString() !== userId) {
+      await Notification.create({
+        user: post.user, 
+        fromUser: userId,
+        type: "like",
+        post: postId
+      })
+    }
+
+    res.status(200).json(like)
   } catch (error) {
     console.error(error)
     res.status(500).json({message: 'Server error'})
@@ -23,18 +43,16 @@ import Like from '../models/likeModel.js'
 
  const unlikePost = async (req, res) => {
    try {
-     const post = await Like.findById(req.params.id)
+     const postId = req.params.id
+     const userId = req.user.userId
+
+     const like = await Like.findOneAndDelete({post: postId, user: userId})
  
-     if (!post) {
-       return res.status(404).json({message:'Post not found'})
+     if (!like) {
+       return res.status(404).json({message:'Like not found'})
      }
  
-     post.likes = post.likes.filter(
-       (id) => id.toString() !== req.user.userId
-     )
- 
-     await post.save()
-     res.status(200).json(post)
+     res.status(200).json(like)
    } catch (error) {
      console.error(error)
      res.status(500).json({message: 'Server Error'})
@@ -43,7 +61,11 @@ import Like from '../models/likeModel.js'
 
   const getPostLikes = async (req, res) => {
     try {
-      const likes = await Like.find({post: req.params.id}).populate('user', 'username avatar')
+      const postId = req.params.id
+
+      const likes = await Like.find({post: postId})
+      .populate('user', 'username avatar')
+
       res.status(200).json(likes)
     } catch (error) {
       console.error(error)

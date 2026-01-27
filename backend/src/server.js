@@ -7,6 +7,9 @@ import postRoutes from './routes/postRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import likeRoutes from './routes/likeRoutes.js'
 import commentRoutes from './routes/commentRoutes.js'
+import searchRoutes from './routes/searchRoutes.js'
+import followRoutes from './routes/followRoutes.js'
+import notificationRoutes from './routes/notificationRoutes.js'
 
 dotenv.config()
 
@@ -20,6 +23,9 @@ app.use('/api/posts', postRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/likes', likeRoutes)
 app.use('/api/comments', commentRoutes)
+app.use("/api/search", searchRoutes)
+app.use("/api/follow", followRoutes)
+app.use("/api/notifications", notificationRoutes)
 
 
 app.get('/api/protected', protect, (req, res) => {
