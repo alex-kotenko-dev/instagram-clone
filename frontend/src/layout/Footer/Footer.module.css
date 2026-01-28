@@ -1,0 +1,24 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.links{
+  display: flex;
+  gap: 4rem;
+}
+
+a{
+  text-decoration: none;
+  color: #737373;
+  font-weight: 400;
+}
+
+.date {
+  color: #737373;
+  font-weight: 400;
+}

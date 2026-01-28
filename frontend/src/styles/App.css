@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.5;
+  /* outline: 2px dashed red; */
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+button {
+  background-color: #0095F6;
+  color: white;
+  font-size: 14px;
+  border-radius: 8px;
+  width: 16.5rem;
+  height: 2rem;
+}

@@ -1,0 +1,31 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem
+}
+
+.profile {
+  padding-top: 2rem;
+}
+
+.link {
+  color: black;
+  font-weight: 550;
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+}
+
+.icon {
+  padding-right: 1rem;
+}
+
