@@ -15,12 +15,3 @@ body {
   font-size: 1rem;
   letter-spacing: 0;
 }
-
-button {
-  background-color: #0095F6;
-  color: white;
-  font-size: 14px;
-  border-radius: 8px;
-  width: 16.5rem;
-  height: 2rem;
-}
