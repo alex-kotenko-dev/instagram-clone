@@ -49,7 +49,7 @@ const Sidebar = () => {
         </NavLink>
 
         <div className={styles.profile}>
-          <NavLink to="/profile/1" className={styles.link}>
+          <NavLink to="/profile" className={styles.link}>
            <img src={profileIcon} alt="profile" className={styles.icon}/>
           <span className={styles.menu}>Profile</span>
           </NavLink>

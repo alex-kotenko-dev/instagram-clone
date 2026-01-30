@@ -2,7 +2,15 @@ import User from '../models/userModel.js'
 
 const getUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).select('-password')
+    const id = req.params.id === 'me' || !req.params.id
+    ? req.user.userId
+    : req.params.id
+
+    if (!id) {
+      return res.status(401).json({message: 'Unauthorized'})
+    }
+
+    const user = await User.findById(id).select('-password')
     if (!user) {
       return res.status(404).json({message: 'User not found'})
     }

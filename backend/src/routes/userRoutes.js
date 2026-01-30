@@ -5,7 +5,8 @@ import userController from '../controllers/userController.js'
 
 const router = express.Router()
 
-router.get('/:id', protect, userController.getUserProfile)
-router.put('/:id', protect, upload.single('avatar'), userController.updateUserProfile)
+router.get('/me', protect, userController.getUserProfile)
+router.get('/:id', userController.getUserProfile)
+router.patch('/me', protect, upload.single('avatar'), userController.updateUserProfile)
 
 export default router

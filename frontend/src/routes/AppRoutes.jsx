@@ -12,8 +12,11 @@ import RegisterPage from "../pages/auth/Register"
 import PageNotFound from "../pages/PageNotFound/PageNotFound"
 import CreatePostPage from "../pages/CreatePost/CreatePostPage"
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute"
-import ForgotPassword from '../pages/auth/ForgotPassword'
-import CheckEmail from '../pages/auth/CheckEmail'
+import ForgotPassword from "../pages/auth/ForgotPassword"
+import CheckEmail from "../pages/auth/CheckEmail"
+
+import EditProfilePage from "../pages/Profile/EditProfilePage"
+import UserProfile from "../pages/Profile/UserProfile"
 
 export const AppRoutes = () => {
   return (
@@ -24,17 +27,18 @@ export const AppRoutes = () => {
       <Route path="/auth/checkemail" element={<CheckEmail />} />
 
       <Route element={<PrivateRoute />}>
-       <Route element={<MainLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/profile/:id" element={<ProfilePage />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/notifications" element={<NotificationsPage />} />
-        <Route path="/messages" element={<MessagePage />} />
-        <Route path="/create" element={<CreatePostPage />} />
-       </Route>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/profile/:id" element={<UserProfile />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/edit" element={<EditProfilePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
+          <Route path="/messages" element={<MessagePage />} />
+          <Route path="/create" element={<CreatePostPage />} />
+        </Route>
       </Route>
-        
 
       <Route path="*" element={<PageNotFound />} />
     </Routes>

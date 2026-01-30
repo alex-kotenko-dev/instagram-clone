@@ -1,4 +1,4 @@
 import API from './api'
 
 export const getUserProfile = (id) => API.get(`/users/${id}`)
-export const updateUserProfile = (id, data) => API.put(`/users/${id}`, data)
+export const updateUserProfile = (data) => API.patch(`/users/me`, data)
