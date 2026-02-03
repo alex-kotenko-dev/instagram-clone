@@ -1,18 +1,20 @@
-import AuthForm from "../../components/AuthForm/AuthForm"
+import { Link } from "react-router-dom"
+import style from "../../components/AuthForm/AuthForm.module.css"
 
 const CheckEmail = () => {
   return (
-    <AuthForm
-      title="Check your email"
-      fields={[]}
-      onSubmit={() => {}}
-      buttonText="Back to login"
-      extraLink={{
-        text: "",
-        to: "/auth/login",
-        label: "Go to login",
-      }}
-    />
+    <div className={style.wrapper}>
+      <div className={style.form}>
+        <h2>Check your email</h2>
+        <p className={style.subtitle}>
+          We sent a password reset link to your email.
+        </p>
+
+        <Link className={style.link_footer} to="/auth/login">
+          Back to login
+        </Link>
+      </div>
+    </div>
   )
 }
 

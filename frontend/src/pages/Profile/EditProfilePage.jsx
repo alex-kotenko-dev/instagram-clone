@@ -2,7 +2,7 @@ import EditProfileForm from "../../components/EditProfile/EditProfileForm"
 
 const EditProfilePage = () => {
   return (
-    <div>
+    <div> 
       <EditProfileForm />
     </div>
   )

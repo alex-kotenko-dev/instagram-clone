@@ -14,6 +14,7 @@ import CreatePostPage from "../pages/CreatePost/CreatePostPage"
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute"
 import ForgotPassword from "../pages/auth/ForgotPassword"
 import CheckEmail from "../pages/auth/CheckEmail"
+import PostPage from "../pages/Post/PostPage"
 
 import EditProfilePage from "../pages/Profile/EditProfilePage"
 import UserProfile from "../pages/Profile/UserProfile"
@@ -37,6 +38,7 @@ export const AppRoutes = () => {
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/messages" element={<MessagePage />} />
           <Route path="/create" element={<CreatePostPage />} />
+          <Route path="/posts/:id" element={<PostPage />} />
         </Route>
       </Route>
 

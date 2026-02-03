@@ -1,16 +1,26 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../redux/slices/authSlice"
 import { useNavigate } from "react-router-dom"
 import AuthForm from "../../components/AuthForm/AuthForm"
+import style from "../../components/AuthForm/AuthForm.module.css"
+import { Link } from "react-router-dom"
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
+import { clearError } from "../../redux/slices/authSlice"
+
 
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const error = useSelector((state) => state.auth.error)
+
+  useEffect(() => {
+    dispatch(clearError())
+  }, [dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,9 +28,10 @@ const Login = () => {
     dispatch(login({ email, password }))
       .unwrap()
       .then((res) => {
-        navigate(`/profile/${res.user._id}`);
-      });
-  };
+        navigate('/profile')
+      })
+      .catch(() => {})
+  }
 
   const fields = [
     {
@@ -37,9 +48,9 @@ const Login = () => {
       value: password,
       placeholder: "Password",
       onChange: (e) => setPassword(e.target.value),
-      autoComplete: "current-password",
+      autoComplete: "new-password",
       rightComponent: {
-        label: showPassword ? "hide" : "show",
+        label: showPassword ? <AiFillEyeInvisible /> : <AiFillEye />,
         onClick: () => setShowPassword(!showPassword),
       },
     }
@@ -47,16 +58,25 @@ const Login = () => {
 
   return (
     <AuthForm
-      title="Login"
       fields={fields}
       onSubmit={handleSubmit}
       buttonText="Log in"
+      error={error}
       extraLink={{
-        text: "Forgot password?",
         to: "/auth/forgotpassword",
-        label: "Reset",
+        label: "Forgot password?",
       }}
-    />
+      footer={<>
+       Don't have an account?{" "}
+       <Link className={style.link_footer} to="/auth/register">
+        Sign up
+       </Link>
+      </>}
+    >
+      <div className={style.divider}>
+       <span>OR</span>
+      </div>
+    </AuthForm>
   )
 }
 
