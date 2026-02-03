@@ -33,7 +33,8 @@ const initialState = {
   token: null,
   loading: false,
   error: null,
-  isAuth: false
+  isAuth: false,
+  authChecked: false
 }
 
 const authSlice = createSlice({
@@ -44,6 +45,7 @@ const authSlice = createSlice({
       state.user = null
       state.token = null
       state.isAuth = false
+      state.authChecked = true
       state.error = null
       localStorage.removeItem('token')
     },
@@ -55,7 +57,8 @@ const authSlice = createSlice({
     setCredentials: (state, action) => {
       state.user = action.payload.user
       state.token = action.payload.token
-      state.isAuth = true
+      state.isAuth = true,
+      state.authChecked = true
     }
   },
 
@@ -71,6 +74,7 @@ const authSlice = createSlice({
       state.user = action.payload.user
       state.token = action.payload.token
       state.isAuth = true
+      localStorage.setItem('token', action.payload.token)
     })
     .addCase(register.rejected, (state, action) => {
       state.loading = false

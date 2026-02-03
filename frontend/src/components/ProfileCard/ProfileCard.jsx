@@ -1,6 +1,6 @@
 import style from './ProfileCard.module.css'
 
-const ProfileCard = ({ profile }) => {
+const ProfileCard = ({ profile, children }) => {
   return (
     <div className={style.wrapper}>
       <div> 
@@ -28,6 +28,8 @@ const ProfileCard = ({ profile }) => {
       </div>
 
       <p>{profile.bio}</p>
+
+      {children}
       </div>
     </div>
   )

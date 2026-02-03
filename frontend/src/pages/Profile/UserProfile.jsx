@@ -1,22 +1,35 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import ProfileCard from "../../components/ProfileCard/ProfileCard"
+import PostCard from "../../components/PostCard/PostCard"
+import FollowButton from "../../components/FollowButton/FollowButton"
 import { getUserProfile } from "../../api/usersApi"
+import { getUserPosts } from "../../api/postsApi"
 
 const UserProfile = () => {
   const { id } = useParams()
   const [user, setUser] = useState(null)
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     getUserProfile(id).then(res => setUser(res.data))
+    getUserPosts(id).then(res => setPosts(res.data))
   }, [id])
 
   if (!user) return <p>Loading...</p>
 
   return (
     <div>
-      <ProfileCard profile={user} />
-      <button>Follow / Unfollow</button>
+      <ProfileCard profile={user}>
+        <FollowButton profile={user} setProfile={setUser} />
+      </ProfileCard>
+
+      <div style={{ marginTop: "20px" }}>
+        {posts.length === 0 && <p>No posts yet</p>}
+        {posts.map(post => (
+          <PostCard key={post._id} post={post} />
+        ))}
+      </div>
     </div>
   )
 }

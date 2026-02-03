@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchMyProfile, updateProfile } from "../../redux/slices/profileSlice"
+import { logout } from "../../redux/slices/authSlice"
 import { useNavigate } from "react-router-dom"
 
 const EditProfileForm = () => {
@@ -42,6 +43,11 @@ const EditProfileForm = () => {
 
   if (loading) return <p>Loading...</p>
 
+  const handleLogout = () => {
+   dispatch(logout())
+   navigate("/auth/login")
+ }
+
   return (
     <div>
       <h2>Edit Profile</h2>
@@ -69,6 +75,11 @@ const EditProfileForm = () => {
         />
 
         <button type="submit">Save</button>
+
+        <button type="button" onClick={handleLogout}>
+         Logout
+        </button>
+
       </form>
     </div>
   )

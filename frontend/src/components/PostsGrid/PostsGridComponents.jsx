@@ -1,26 +1,23 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
+import styles from './PostsGrid.module.css'
 
 const PostsGrid = ({ posts }) => {
   const navigate = useNavigate()
+  const location = useLocation()
 
   return (
-    <div style={{
-      display: "grid",
-      gridTemplateColumns: "repeat(3, 1fr)",
-      gap: "10px",
-      marginTop: "20px"
-    }}>
+    <div className={styles.grid}>
       {posts.map(post => (
         <div
           key={post._id}
-          style={{ height: "250px", cursor: "pointer" }}
-          onClick={() => navigate(`/posts/${post._id}`)}
+          className={styles.item}
+          onClick={() =>
+            navigate(`/posts/${post._id}`, {
+              state: { background: location }
+            })
+          }
         >
-          <img
-            src={post.image}
-            alt="post"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
+          <img src={post.image} alt="" />
         </div>
       ))}
     </div>

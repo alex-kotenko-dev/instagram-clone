@@ -1,9 +1,11 @@
-import React from 'react'
+import SearchBox from "../../components/Search/SearchBox"
 
-export default function SearchPage() {
+const SearchPage = () => {
   return (
     <div>
-      
+      <SearchBox />
     </div>
   )
 }
+
+export default SearchPage

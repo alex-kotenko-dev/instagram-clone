@@ -1,9 +1,13 @@
 import React from 'react'
+import Notifications from '../../components/Notifications/Notifications'
 
-export default function NotificationsPage() {
+const NotificationsPage = () => {
   return (
-    <div>
-      
+    <div style={{ padding: "20px" }}>
+      <h2>Notifications</h2>
+      <Notifications />
     </div>
   )
 }
+
+export default NotificationsPage
