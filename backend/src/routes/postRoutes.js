@@ -1,14 +1,16 @@
 import express from "express"
 import protect from '../middlewares/authMiddleware.js'
 import postController from '../controllers/postController.js'
+import multer from "multer"
 
 const router = express.Router()
+const upload = multer({ storage: multer.memoryStorage() })
 
-router.post('/', protect, postController.createPost)
+router.post('/', protect, upload.single('image'), postController.createPost)
 router.get('/', protect, postController.getPosts)
+router.get('/user/:id', postController.getUserPosts)
+router.patch("/:id", protect, postController.editPost)
 router.delete('/:id', protect, postController.deletePost)
-router.put("/:id", protect, postController.editPost)
-router.get('/user/:id', protect, postController.getUserPosts)
-router.get('/:id', protect, postController.getPostById)
+router.get('/:id', postController.getPostById)
 
 export default router

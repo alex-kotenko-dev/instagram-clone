@@ -1,9 +1,11 @@
-import React from 'react'
+import PostFeed from "../../components/PostFeed/PostFeedComponent"
 
-export default function HomePage() {
+const HomePage = () => {
   return (
     <div>
-      
+      <PostFeed filter="following"/>
     </div>
   )
 }
+
+export default HomePage

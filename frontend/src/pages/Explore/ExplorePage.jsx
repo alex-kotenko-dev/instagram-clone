@@ -1,9 +1,11 @@
-import React from 'react'
+import PostFeed from "../../components/PostFeed/PostFeedComponent"
 
-export default function ExplorePage() {
+const ExplorePage = () => {
   return (
     <div>
-      
+      <PostFeed filter="all"/>
     </div>
   )
 }
+
+export default ExplorePage

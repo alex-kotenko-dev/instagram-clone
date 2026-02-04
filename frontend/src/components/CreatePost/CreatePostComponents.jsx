@@ -5,25 +5,16 @@ import { useNavigate } from "react-router-dom"
 
 const CreatePost = ({ onPostCreated }) => {
   const [text, setText] = useState("")
-  const [image, setImage] = useState("")
+  const [image, setImage] = useState(null)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = () => resolve(reader.result)
-      reader.onerror = (error) => reject(error)
-    })
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!text && !image) {
+    if (!text && !image) { 
       setError("Post cannot be empty")
       return
     }
@@ -32,7 +23,11 @@ const CreatePost = ({ onPostCreated }) => {
       setLoading(true)
       setError("")
 
-      await createPost({ text, image })
+      const formData = new FormData()
+      formData.append("text", text)
+      if (image) formData.append("image", image)
+
+      await createPost(formData)
 
       setText("")
       setImage("")
@@ -40,13 +35,14 @@ const CreatePost = ({ onPostCreated }) => {
       if (onPostCreated) onPostCreated()
       navigate("/profile")
     } catch (e) {
+      console.error(e)
       setError("Failed to create post")
     } finally {
       setLoading(false)
     }
   }
 
-  const handleImageChange = async (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0]
     if (!file) return
 
@@ -56,8 +52,7 @@ const CreatePost = ({ onPostCreated }) => {
     }
 
     setError("")
-    const base64 = await convertToBase64(file)
-    setImage(base64)
+    setImage(file) 
   }
 
   return (

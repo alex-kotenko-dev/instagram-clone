@@ -1,20 +1,27 @@
  import Post from '../models/postModel.js'
 
  const createPost = async(req, res) => {
-  const {text, image} = req.body
-
   try {
+    const text = req.body.text || ""
+    let image = ""
+
+    if (req.file) {
+      const mime = req.file.mimetype
+      const base64 = req.file.buffer.toString("base64");
+      image = `data:${mime};base64,${base64}`
+    }
+
     const post = new Post({
       user: req.user.userId,
       text,
-      image: image || ""
+      image
     })
 
     await post.save()
     res.status(201).json(post)
   } catch (error) {
     console.error(error)
-    res.status(500).json({message: 'Server error'})
+    res.status(500).json({ message: "Server error" })
   }
  }
 
