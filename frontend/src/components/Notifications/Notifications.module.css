@@ -1,20 +1,17 @@
 .wrapper {
-  width: 400px;
-  max-height: 600px;
   overflow-y: auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  background: #fff;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .notification {
   display: flex;
-  padding: 8px;
-  margin-bottom: 6px;
+  flex-direction: row;
   cursor: pointer;
   border-radius: 6px;
-  transition: background 0.2s;
+  padding: 8px;
 }
 
 .notification:hover {
@@ -29,11 +26,27 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
 .content {
   flex: 1;
+}
+
+.closeBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+}
+
+.closeBtn:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .date {

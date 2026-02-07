@@ -1,11 +1,11 @@
 import React from 'react'
 import Notifications from '../../components/Notifications/Notifications'
 
-const NotificationsPage = () => {
+const NotificationsPage = ({closePanel}) => {
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       <h2>Notifications</h2>
-      <Notifications />
+      <Notifications closePanel={closePanel}/>
     </div>
   )
 }

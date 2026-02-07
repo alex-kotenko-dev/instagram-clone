@@ -1,9 +1,10 @@
 import SearchBox from "../../components/Search/SearchBox"
 
-const SearchPage = () => {
+const SearchPage = ({closePanel}) => {
   return (
     <div>
-      <SearchBox />
+      <h2>Search</h2>
+      <SearchBox closePanel={closePanel}/>
     </div>
   )
 }

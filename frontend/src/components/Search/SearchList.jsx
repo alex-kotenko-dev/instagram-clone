@@ -1,18 +1,12 @@
-import { useNavigate } from "react-router-dom"
-
-const SearchList = ({ users }) => {
-  const navigate = useNavigate()
-
-  if (!users.length) {
-    return <p>No users found</p>
-  }
+const SearchList = ({ users, onSelect }) => {
+  if (!users.length) return null
 
   return (
-    <div>
-      {users.map((user) => (
+    <div style={{ paddingTop: "20px" }}>
+      {users.map(user => (
         <div
           key={user._id}
-          onClick={() => navigate(`/profile/${user._id}`)}
+          onClick={() => onSelect(user)}
           style={{
             display: "flex",
             alignItems: "center",
@@ -28,6 +22,7 @@ const SearchList = ({ users }) => {
             height={40}
             style={{ borderRadius: "50%" }}
           />
+
           <div>
             <b>{user.username}</b>
             <p>{user.fullname}</p>

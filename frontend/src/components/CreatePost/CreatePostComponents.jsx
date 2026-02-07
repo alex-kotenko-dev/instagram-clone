@@ -30,7 +30,7 @@ const CreatePost = ({ onPostCreated }) => {
       await createPost(formData)
 
       setText("")
-      setImage("")
+      setImage(null)
 
       if (onPostCreated) onPostCreated()
       navigate("/profile")

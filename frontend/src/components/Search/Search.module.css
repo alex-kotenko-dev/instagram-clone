@@ -1,0 +1,30 @@
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 1.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: none;
+  background-color: #EFEFEF;
+  border-radius: 8px;
+  outline: none;
+}
+
+.clearIcon {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888686; 
+}
+
+.noUsers {
+  padding-top: 8px;
+  font-weight: 600;
+  color: #7c7979;
+}

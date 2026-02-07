@@ -12,6 +12,8 @@ import styles from './MainLayout.module.css'
 export const MainLayout = () => {
   const [panel, setPanel] = useState(null)
 
+  const closePanel = () => setPanel(null)
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -26,18 +28,18 @@ export const MainLayout = () => {
           <>
             <div
               className={styles.overlay}
-              onClick={() => setPanel(null)}
+              onClick={closePanel}
             />
 
             {panel === "search" && (
               <div className={styles.panel}>
-                <SearchPage />
+                <SearchPage closePanel={closePanel} />
               </div>
             )}
 
             {panel === "notifications" && (
               <div className={styles.panel}>
-                <NotificationsPage />
+                <NotificationsPage closePanel={closePanel}/>
               </div>
             )}
           </>

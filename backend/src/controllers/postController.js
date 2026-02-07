@@ -71,7 +71,12 @@
     }
 
     post.text = req.body.text || post.text
-    post.image = req.body.image || post.image
+
+    if (req.file) {
+      const mime = req.file.mimetype
+      const base64 = req.file.buffer.toString('base64')
+      post.image = `data:${mime};base64,${base64}`
+    }
 
     await post.save()
     res.status(200).json(post)

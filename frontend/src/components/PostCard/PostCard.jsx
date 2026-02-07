@@ -1,16 +1,103 @@
-import LikeButton from "../LikeButton/LikeButtonComponents"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Comments from "../Comments/CommentsComponents"
+import { deletePost, editPost } from "../../api/postsApi"
+import PostActionsModal from "./PostActionsModal/PostActionsModal"
+import styles from "./PostCard.module.css"
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, currentUserId }) => {
+  const navigate = useNavigate()
+
+  const userIdFromPost = post.user._id ? post.user._id : post.user
+  const isOwner = String(currentUserId) === String(userIdFromPost)
+
+  const [loading, setLoading] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [editText, setEditText] = useState(post.text)
+
+  const handleDelete = async () => {
+    setLoading(true)
+    try {
+      await deletePost(post._id)
+      navigate(`/profile/${currentUserId}`)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSave = async () => {
+    setLoading(true)
+    try {
+      const formData = new FormData()
+      formData.append("text", editText)
+      await editPost(post._id, formData)
+      setIsEditing(false)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(
+      `${window.location.origin}/posts/${post._id}`
+    )
+    setShowModal(false)
+  }
+
   return (
-    <div>
-      <img src={post.image} width={300} />
-      <p>{post.text}</p>
+  <div className={styles.card}>
+     {post.image && (
+      <div className={styles.left}>
+        <img src={post.image} alt="" className={styles.image} />
+      </div>
+     )}
 
-      <LikeButton postId={post._id} />
-      <Comments postId={post._id} />
-    </div>
-  )
+      <div className={styles.right}>
+
+       <div className={styles.header}>
+         <div>{post.user.username}</div>
+
+         {isOwner && (
+          <button
+            className={styles.dots}
+            onClick={() => setShowModal(true)}>
+            ⋯
+          </button>
+          )}
+       </div>
+
+       {isEditing ? (
+        <>
+          <textarea
+            value={editText}
+            onChange={(e) => setEditText(e.target.value)}
+            className={styles.textarea}
+          />
+          <button onClick={handleSave}>Save</button>
+        </>
+       ) : (
+         <p className={styles.text}>{post.text}</p>
+       )}
+
+        <div className={styles.commentsList}>
+          <Comments postId={post._id}/>
+        </div>
+      </div> 
+
+     {showModal && (
+      <PostActionsModal
+        onClose={() => setShowModal(false)}
+        onEdit={() => {
+          setIsEditing(true)
+          setShowModal(false)
+        }}
+        onDelete={handleDelete}
+        onCopy={handleCopy}
+      />
+     )}
+  </div>
+ )
 }
 
 export default PostCard

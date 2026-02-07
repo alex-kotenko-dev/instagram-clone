@@ -17,7 +17,7 @@ const PostsGrid = ({ posts }) => {
             })
           }
         >
-          <img src={post.image} alt="" />
+          <img className={styles.itemImg} src={post.image} alt="" />
         </div>
       ))}
     </div>

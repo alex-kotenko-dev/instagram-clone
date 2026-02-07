@@ -6,5 +6,6 @@ const router = express.Router()
 
 router.get('/', protect, notificationController.getNotifications)
 router.patch('/:id/read', protect, notificationController.markAsRead)
+router.delete('/:id', protect, notificationController.deleteNotification)
 
 export default router

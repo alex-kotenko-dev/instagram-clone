@@ -1,27 +1,30 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import { getPostById } from "../../api/postsApi"
-
-import LikeButton from "../../components/LikeButton/LikeButtonComponents"
-import Comments from "../../components/Comments/CommentsComponents"
+import PostCard from "../../components/PostCard/PostCard"
 
 const PostPage = () => {
   const { id } = useParams()
+  const currentUserId = useSelector(state => state.auth.user?._id)
   const [post, setPost] = useState(null)
 
   useEffect(() => {
-    getPostById(id).then(res => setPost(res.data))
+    getPostById(id)
+    .then(res => setPost(res.data))
+    .catch(() => setPost(null))
   }, [id])
 
   if (!post) return <p>Loading...</p>
 
+  const handlePostDeleted = () => {
+    setPost(null)
+  }
+
   return (
     <div>
-      <img src={post.image} alt="post" width={400} />
-      <p>{post.text}</p>
-
-      <LikeButton postId={post._id} />
-      <Comments postId={post._id} />
+      <PostCard
+        post={post} currentUserId={currentUserId}/>
     </div>
   )
 }
