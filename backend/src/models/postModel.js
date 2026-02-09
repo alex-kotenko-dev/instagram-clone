@@ -11,8 +11,8 @@ const commentSchema = new mongoose.Schema(
 const postSchema =new mongoose.Schema(
   {
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    text: {type: String, required: true},
-    image: { type: String, default: "" },
+    text: {type: String, default: ""},
+    image: { type: String, required: true },
     likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     comments: [commentSchema]
   },

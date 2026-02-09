@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { followUser, unfollowUser, getFollowers } from "../../api/followApi"
+import styles from "./FollowButton.module.css"
 
 const FollowButton = ({ profile, setProfile }) => {
   const currentUserId = useSelector(state => state.auth.user?._id)
@@ -51,7 +52,7 @@ const FollowButton = ({ profile, setProfile }) => {
   }
 
   return (
-    <button onClick={handleClick} disabled={loading}>
+    <button onClick={handleClick} disabled={loading} className={styles.button}>
       {isFollowing ? "Unfollow" : "Follow"}
     </button>
   )

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Comments from "../Comments/CommentsComponents"
 import { deletePost, editPost } from "../../api/postsApi"
@@ -8,7 +8,7 @@ import styles from "./PostCard.module.css"
 const PostCard = ({ post, currentUserId }) => {
   const navigate = useNavigate()
 
-  const userIdFromPost = post.user._id ? post.user._id : post.user
+  const userIdFromPost = post.user?._id
   const isOwner = String(currentUserId) === String(userIdFromPost)
 
   const [loading, setLoading] = useState(false)
@@ -56,7 +56,7 @@ const PostCard = ({ post, currentUserId }) => {
       <div className={styles.right}>
 
        <div className={styles.header}>
-         <div>{post.user.username}</div>
+         <div>{post.user?.username || "Deleted profile"}</div>
 
          {isOwner && (
           <button

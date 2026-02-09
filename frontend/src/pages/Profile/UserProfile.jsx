@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import ProfileCard from "../../components/ProfileCard/ProfileCard"
 import PostCard from "../../components/PostCard/PostCard"
 import FollowButton from "../../components/FollowButton/FollowButton"
+import PostsGrid from "../../components/PostsGrid/PostsGridComponents"
 import { getUserProfile } from "../../api/usersApi"
 import { getUserPosts } from "../../api/postsApi"
 
@@ -24,12 +25,7 @@ const UserProfile = () => {
         <FollowButton profile={user} setProfile={setUser} />
       </ProfileCard>
 
-      <div style={{ marginTop: "20px" }}>
-        {posts.length === 0 && <p>No posts yet</p>}
-        {posts.map(post => (
-          <PostCard key={post._id} post={post} />
-        ))}
-      </div>
+      <PostsGrid posts={posts} />
     </div>
   )
 }

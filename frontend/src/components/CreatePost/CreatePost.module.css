@@ -1,27 +1,86 @@
-.form {
+.overlay {
+  overflow: hidden;
+  width: 57rem;
+  height: 35rem;
+  border-radius: 12px;
+  background: white;
+}
+
+.createForm {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 600px;
-  margin: 20px 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #a8a8a8;
+}
+
+.title {
+  margin-left: 2rem;
+}
+
+.containerRightLeft {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.left {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FAFAFA;
+  border-right: 1px solid #a8a8a8;
+}
+
+.fileInput {
+  display: none;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.right {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
 }
 
 .textarea {
-  width: 100%;
-  height: 100px;
-  padding: 10px;
-  font-size: 16px;
+  flex: 1;
   resize: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
 }
 
-.file {
-  padding: 5px;
+.error {
+  color: red;
+  margin-top: 0.5rem;
 }
 
 .btn {
-  padding: 10px;
-  background: #3897f0;
-  color: #fff;
+  background-color: transparent;
+  font-weight: 550;
+  font-size: 14px;
+  color: #0095F6;
   border: none;
+  cursor: pointer;
+  padding: 0.8rem;
+}
+
+.uploadPlaceholder {
   cursor: pointer;
 }

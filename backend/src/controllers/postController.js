@@ -5,11 +5,13 @@
     const text = req.body.text || ""
     let image = ""
 
-    if (req.file) {
+    if (!req.file) {
+      return res.status(400).json({ message: "Image is required" })
+    }
+
       const mime = req.file.mimetype
       const base64 = req.file.buffer.toString("base64");
       image = `data:${mime};base64,${base64}`
-    }
 
     const post = new Post({
       user: req.user.userId,

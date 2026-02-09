@@ -21,13 +21,13 @@ const PostFeed = ({ filter }) => {
     setLoading(true)
     try {
       let allPosts = await getPosts()
+      allPosts = allPosts.data.filter(p => p.user != null)
+
       if (filter === "following") {
         const res = await getFollowing(userId)
-        const followingIds = res.data.map(f => f.following._id)
-        allPosts = allPosts.data.filter(p => followingIds.includes(p.user._id))
-      } else {
-        allPosts = allPosts.data
-      }
+        const followingIds = res.data?.map(f => f.following._id) || []
+        allPosts = allPosts.filter(p => followingIds.includes(p.user._id))
+      } 
 
       allPosts = randomArray(allPosts)
 

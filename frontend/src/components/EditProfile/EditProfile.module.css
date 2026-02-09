@@ -1,0 +1,99 @@
+.editButton {
+  background-color: #EFEFEF;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  width: 10.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.wrapperEdit {
+  margin: 2rem;
+}
+
+.avatarRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lch(97.31% 0.35 17.6);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.avatarCircle {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.newPhotoButton {
+  background-color: #0095F6;
+  width: 8rem;
+  padding: 7px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
+}
+
+.inputEdit {
+  border: 1px solid #DBDBDB;
+  border-radius: 12px;
+  padding: 8px;
+  width: 38rem;
+}
+
+.titles {
+  margin-top: 1rem;
+}
+
+.textareaEdit {
+  width: 38rem;
+  min-height: 6rem;
+  border-radius: 12px;
+  padding: 8px;
+  border: 1px solid #DBDBDB;
+  resize: vertical;
+}
+
+.btnSave {
+  background-color: #0095F6;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  width: 16.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.buttonsEdit {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.textareaWrap {
+  position: relative;
+}
+
+.counter {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  color: #888;
+}
+
+.warn {
+  color: #e5484d;
+}

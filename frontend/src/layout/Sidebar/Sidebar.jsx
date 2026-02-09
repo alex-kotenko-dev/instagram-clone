@@ -51,10 +51,10 @@ const Sidebar = ({ openPanel }) => {
           <span className={styles.menu}>Messages</span>
         </NavLink>
 
-        <NavLink to="/create" className={styles.link}>
+        <div className={styles.link} onClick={() => openPanel("create")}>
           <img src={createIcon} alt="create" className={styles.icon}/>
           <span className={styles.menu}>Create</span>
-        </NavLink>
+        </div>
 
         <div className={styles.profile}>
           <NavLink to="/profile" className={styles.link}>

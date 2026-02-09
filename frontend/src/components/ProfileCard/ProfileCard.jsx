@@ -11,19 +11,19 @@ const ProfileCard = ({ profile, children }) => {
       <h2 className={style.title}>{profile.fullname}</h2>
 
       <div className={style.container}>
-      <div>
+      <div className={style.stat}>
         <b>{profile.postsCount || 0}</b>
-        <p>Posts</p>
+        <span>posts</span>
       </div>
 
-      <div>
+      <div className={style.stat}>
         <b>{profile.followersCount || 0}</b>
-        <p>Followers</p>
+        <span>followers</span>
       </div>
 
-      <div>
+      <div className={style.stat}>
         <b>{profile.followingCount || 0}</b>
-        <p>Following</p>
+        <span>following</span>
       </div>
       </div>
 
