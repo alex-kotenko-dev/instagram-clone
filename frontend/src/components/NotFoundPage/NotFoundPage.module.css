@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.imageSide img {
+  max-width: 25rem;
+  width: 100%;
+  height: auto;
+}
+
+.textSide p {
+  color: #737373;
+  font-weight: 600;
+  max-width: 34rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+}

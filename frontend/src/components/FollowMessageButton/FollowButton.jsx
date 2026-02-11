@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { followUser, unfollowUser, getFollowers } from "../../api/followApi"
-import styles from "./FollowButton.module.css"
+import styles from "./FollowMessageButton.module.css"
+import MessageButton from "./MessageButton"
 
 const FollowButton = ({ profile, setProfile }) => {
   const currentUserId = useSelector(state => state.auth.user?._id)
   const [isFollowing, setIsFollowing] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
-    if (!profile) return
+    if (!profile || !currentUserId) return
 
     const checkFollowing = async () => {
       try {
@@ -24,7 +26,7 @@ const FollowButton = ({ profile, setProfile }) => {
     checkFollowing()
   }, [profile, currentUserId])
 
-  if (currentUserId === profile?._id) return null
+  if (!profile || currentUserId === profile?._id) return null
 
   const handleClick = async () => {
     setLoading(true)
@@ -52,9 +54,19 @@ const FollowButton = ({ profile, setProfile }) => {
   }
 
   return (
-    <button onClick={handleClick} disabled={loading} className={styles.button}>
-      {isFollowing ? "Unfollow" : "Follow"}
-    </button>
+    <div className={styles.buttons}>
+      <button
+        onClick={handleClick}
+        disabled={loading}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+        className={isFollowing ? styles.followingBtn : styles.followBtn}
+      >
+        {isFollowing ? (hovering ? "Unfollow" : "Following") : "Follow"}
+      </button>
+      
+      <MessageButton recipientId={profile._id} />
+    </div>
   )
 }
 

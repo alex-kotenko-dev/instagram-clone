@@ -12,6 +12,7 @@ import styles from './MainLayout.module.css'
 
 export const MainLayout = () => {
   const [panel, setPanel] = useState(null)
+  const [newPost, setNewPost] = useState(null)
   const location = useLocation()
 
   const closePanel = () => setPanel(null)
@@ -26,7 +27,7 @@ export const MainLayout = () => {
         <Sidebar openPanel={setPanel} />
 
         <main className={styles.main}>
-          <Outlet />
+          <Outlet context={{newPost, setNewPost}}/>
         </main>
 
         {panel && (
@@ -50,7 +51,8 @@ export const MainLayout = () => {
 
         {panel === "create" && (
           <div className={styles.createModal}>
-            <CreatePost closePanel={closePanel} />
+            <CreatePost closePanel={closePanel} 
+            onPostCreated={(post) => setNewPost(post)}/>
           </div>
         )}
 

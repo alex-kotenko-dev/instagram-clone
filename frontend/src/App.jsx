@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppRoutes } from './routes/AppRoutes'
 import { logout, setCredentials } from './redux/slices/authSlice'
+import { connectSocket } from './socket'
 import API from './api/api'
 import './styles/App.css'
 
@@ -18,6 +19,8 @@ function App() {
             user: res.data,
             token
           }))
+
+          connectSocket(token)
         })
         .catch(() => {
           dispatch(logout())

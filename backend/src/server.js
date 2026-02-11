@@ -10,6 +10,7 @@ import commentRoutes from './routes/commentRoutes.js'
 import searchRoutes from './routes/searchRoutes.js'
 import followRoutes from './routes/followRoutes.js'
 import notificationRoutes from './routes/notificationRoutes.js'
+import messageRoutes from './routes/messageRoutes.js'
 
 import http from 'http'
 import {Server} from 'socket.io'
@@ -34,6 +35,7 @@ app.use('/api/comments', commentRoutes)
 app.use("/api/search", searchRoutes)
 app.use("/api/follow", followRoutes)
 app.use("/api/notifications", notificationRoutes)
+app.use("/api/messages", messageRoutes)
 
 app.get('/api/protected', protect, (req, res) => {
   res.json({message: 'This is a protected route', user: req.user})
@@ -74,6 +76,13 @@ io.on('connection', (socket) => {
     console.log('User disconnect:', socket.userId)
   })
 })
+
+app.use((req, res, next) => {
+  req.io = io
+  next()
+})
+
+app.use('/api/messages', messageRoutes)
 
 
 async function start() {

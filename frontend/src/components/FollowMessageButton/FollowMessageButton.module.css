@@ -1,0 +1,35 @@
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.followBtn, .followingBtn, .messageBtn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  width: 8rem;
+  letter-spacing: 1px;
+  font-weight: 550;
+}
+
+.followBtn {
+  background-color: #0095F6;
+  color: white;
+}
+
+.followingBtn, .messageBtn{
+  background-color: #EFEFEF ;
+  cursor: pointer;
+}
+
+.followBtn:hover {
+  background-color: #0077cc; 
+}
+
+.followingBtn:hover {
+  background-color: #dedede;
+}
+
+.messageBtn:hover {
+  background-color: #dedede;
+}

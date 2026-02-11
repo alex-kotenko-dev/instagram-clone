@@ -7,7 +7,6 @@ import ExplorePage from "../pages/Explore/ExplorePage"
 import MessagePage from "../pages/Message/MessagePage"
 import LoginPage from "../pages/auth/Login"
 import RegisterPage from "../pages/auth/Register"
-import PageNotFound from "../pages/PageNotFound/PageNotFound"
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute"
 import ForgotPassword from "../pages/auth/ForgotPassword"
 import CheckEmail from "../pages/auth/CheckEmail"
@@ -16,6 +15,8 @@ import PostModal from "../pages/Post/PostModal"
 
 import EditProfilePage from "../pages/Profile/EditProfilePage"
 import UserProfile from "../pages/Profile/UserProfile"
+
+import PageNotFound from "../pages/PageNotFound/PageNotFound"
 
 export const AppRoutes = () => {
   const location = useLocation()
@@ -37,7 +38,9 @@ export const AppRoutes = () => {
             <Route path="/profile/edit" element={<EditProfilePage />} />
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/messages" element={<MessagePage />} />
+            {/* <Route path="/messages/:userId" element={<MessagePage />} /> */}
             <Route path="/posts/:id" element={<PostPage />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Route>
 

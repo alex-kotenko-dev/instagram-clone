@@ -7,11 +7,14 @@
   border-right: 1px solid #DBDBDB;
   box-shadow: 4px 0 12px rgba(0,0,0,0.05);
 }
+.logo {
+  width: 9rem;
+}
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 2rem
+  gap: 2rem;
 }
 
 .profile {
@@ -19,17 +22,49 @@
 }
 
 .link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
   color: black;
   font-weight: 550;
-  position: relative;
   cursor: pointer;
+  text-decoration: none;
+
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+
+  transition: all 0.2s;
+}
+
+.link:hover {
+  background: #f3f3f3;
 }
 
 .menu {
-  position: absolute;
+  position: static;
 }
 
-.icon {
-  padding-right: 1rem;
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+  flex-shrink: 0;
+  display: block;
+
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.link:hover .avatar {
+  transform: scale(1.1);
+}
+
+/* .active {
+  background: #e9f2ff;
+} */
+
+.active .avatar {
+  box-shadow: 0 0 0 2px #ff5e8e;
+}

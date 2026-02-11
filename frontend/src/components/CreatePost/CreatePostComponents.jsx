@@ -27,13 +27,13 @@ const CreatePost = ({ onPostCreated, closePanel }) => {
       if (image) formData.append("image", image)
 
      const res = await createPost(formData)
-     console.log("POST CREATED:", res.data)
 
       if (onPostCreated) {
         onPostCreated(res.data)
       }
 
       setText("")
+      if (image) URL.revokeObjectURL(image)
       setImage(null)
 
       if (closePanel) closePanel()
@@ -115,3 +115,4 @@ const CreatePost = ({ onPostCreated, closePanel }) => {
 }
 
 export default CreatePost
+
