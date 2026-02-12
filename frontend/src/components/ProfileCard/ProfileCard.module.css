@@ -6,11 +6,30 @@
   padding: 2rem;
 }
 
+.avatarWrapper {
+  width: 158px;     
+  height: 158px;
+  border-radius: 50%; 
+  padding: 4px;      
+  background: linear-gradient(
+    45deg,
+    #feda75,
+    #fa7e1e,
+    #d62976,
+    #962fbf,
+    #4f5bd5
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .avatar {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #fff;
 }
 
 .container {

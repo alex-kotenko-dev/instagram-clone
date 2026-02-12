@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { useSelector } from "react-redux"
+import React, { useState } from "react"
 import styles from "./Sidebar.module.css"
 
 import ICHGRA from "../../assets/icons/ICHGRA.svg"
@@ -12,9 +13,15 @@ import createIcon from "../../assets/icons/create.svg"
 
 const Sidebar = ({ openPanel }) => {
   const { profile } = useSelector((state) => state.profile)
+  const [activePanel, setActivePanel] = useState(null)
+
+  const handleOpenPanel = (panelName) => {
+    openPanel(panelName)
+    setActivePanel(panelName)
+  }
 
   const navClass = ({ isActive }) =>
-    isActive ? `${styles.link} ${styles.active}` : styles.link
+    isActive ? `${styles.link} ${styles.navlinkActive}` : styles.link
 
   return (
     <aside className={styles.sidebar}>
@@ -28,7 +35,9 @@ const Sidebar = ({ openPanel }) => {
           <span className={styles.menu}>Home</span>
         </NavLink>
 
-        <div className={styles.link} onClick={() => openPanel("search")}>
+        <div 
+          className={`${styles.link} ${activePanel === "search" ? styles.panelActive : ""}`}
+          onClick={() => handleOpenPanel("search")}>
           <img src={searchIcon} className={styles.icon}/>
           <span className={styles.menu}>Search</span>
         </div>
@@ -38,7 +47,9 @@ const Sidebar = ({ openPanel }) => {
           <span className={styles.menu}>Explore</span>
         </NavLink>
 
-        <div className={styles.link} onClick={() => openPanel("notifications")}>
+        <div 
+          className={`${styles.link} ${activePanel === "notifications" ? styles.panelActive : ""}`}
+          onClick={() => handleOpenPanel("notifications")}>
           <img src={notificationIcon} className={styles.icon}/>
           <span className={styles.menu}>Notifications</span>
         </div>
@@ -48,7 +59,9 @@ const Sidebar = ({ openPanel }) => {
           <span className={styles.menu}>Messages</span>
         </NavLink>
 
-        <div className={styles.link} onClick={() => openPanel("create")}>
+        <div 
+          className={`${styles.link} ${activePanel === "create" ? styles.panelActive : ""}`} 
+          onClick={() => handleOpenPanel("create")}>
           <img src={createIcon} className={styles.icon}/>
           <span className={styles.menu}>Create</span>
         </div>

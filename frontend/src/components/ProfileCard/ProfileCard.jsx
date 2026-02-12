@@ -3,7 +3,7 @@ import style from './ProfileCard.module.css'
 const ProfileCard = ({ profile, children }) => {
   return (
     <div className={style.wrapper}>
-      <div> 
+      <div className={style.avatarWrapper}> 
         <img className={style.avatar} src={profile.avatar || "/avatar.png"} alt="avatar" width={120} />
       </div>
 

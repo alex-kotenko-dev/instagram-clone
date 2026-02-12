@@ -1,23 +1,50 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
-  height: 100%;
+  gap: 3rem;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .listComments {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
   overflow-y: auto;
+  flex: 1 1 auto;
   min-height: 0;
-  padding-bottom: 2rem;
+  padding-top: 2rem;
 }
 
 .form {
+  flex-shrink: 0;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   border-top: 1px solid #DBDBDB;
+}
+
+.emojiButton {
+  cursor: pointer;     
+  font-size: 20px;     
+  line-height: 1;      
+  display: inline-flex; 
+  align-items: center;  
+  justify-content: center;
+}
+
+.emojiPickerWrapper {
+  position: absolute;
+  bottom: 100%;
+  right: 4;
+  z-index: 10;
+  width: 15rem;
+  max-height: 10rem;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: #fff;
 }
 
 .input {
@@ -39,7 +66,6 @@
   background: transparent;
   outline: none;
   border: none;
-  padding: 1rem;
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
 }
@@ -55,12 +81,46 @@
 
 .iconRow {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   font-size: 22px;
-  padding: 1rem;
   border-top: 1px solid #DBDBDB;
 }
 
 .icon {
   cursor: pointer;
 }
+
+.commentRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.commentBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.username {
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.postAuthor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+

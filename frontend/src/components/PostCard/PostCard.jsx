@@ -56,7 +56,19 @@ const PostCard = ({ post, currentUserId }) => {
       <div className={styles.right}>
 
        <div className={styles.header}>
-         <div>{post.user?.username || "Deleted profile"}</div>
+
+        <div className={styles.userBlock}>
+          {post.user?.avatar && (
+         <img
+           src={post.user.avatar}
+           alt=""
+          className={styles.avatar}
+         />
+        )}
+        <div>
+         {post.user?.username || "Deleted profile"}
+        </div>
+      </div>
 
          {isOwner && (
           <button
@@ -81,7 +93,7 @@ const PostCard = ({ post, currentUserId }) => {
        )}
 
         <div className={styles.commentsList}>
-          <Comments postId={post._id}/>
+          <Comments postId={post._id} postUser={post.user}/>
         </div>
       </div> 
 

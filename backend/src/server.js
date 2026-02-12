@@ -82,9 +82,6 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/api/messages', messageRoutes)
-
-
 async function start() {
   try {
     await connectDB()

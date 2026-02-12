@@ -1,7 +1,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
   padding: 2rem;
   width: 15rem;
   border-right: 1px solid #DBDBDB;
@@ -14,11 +14,11 @@
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .profile {
-  padding-top: 2rem;
+  padding-top: 1.5rem;
 }
 
 .link {
@@ -61,10 +61,29 @@
   transform: scale(1.1);
 }
 
-/* .active {
-  background: #e9f2ff;
+/* .active .avatar {
+  box-shadow: 0 0 0 2px #ff5e8e;
 } */
 
-.active .avatar {
-  box-shadow: 0 0 0 2px #ff5e8e;
+.link:hover .menu,
+.link:hover .icon {
+  color: #0095F6;        
+}
+
+.link.active {
+  background: #e9f2ff;   
+}
+
+.link:hover .avatar {
+  transform: scale(1.1);  
+}
+
+.link.active .avatar {
+  box-shadow: 0 0 0 2px #ff5e8e; 
+}
+
+.link .avatar,
+.link .menu,
+.link .icon {
+  transition: all 0.2s ease;
 }

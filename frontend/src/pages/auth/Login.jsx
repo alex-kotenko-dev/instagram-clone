@@ -7,6 +7,8 @@ import style from "../../components/AuthForm/AuthForm.module.css"
 import { Link } from "react-router-dom"
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
 import { clearError } from "../../redux/slices/authSlice"
+import img404 from '../../assets/images/Background.svg'
+
 
 
 const Login = () => {
@@ -57,6 +59,8 @@ const Login = () => {
   ]
 
   return (
+    <div className={style.containerAuth}>
+      <img src={img404} alt="404" />
     <AuthForm
       fields={fields}
       onSubmit={handleSubmit}
@@ -76,7 +80,9 @@ const Login = () => {
       <div className={style.divider}>
        <span>OR</span>
       </div>
+      
     </AuthForm>
+    </div>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import PostsGrid from "../PostsGrid/PostsGridComponents"
+import PostCardCompact from "../PostCardCompact/PostCardCompact"
 import { getPosts } from "../../api/postsApi"
 import { getFollowing } from "../../api/followApi"
 
@@ -47,10 +48,23 @@ const PostFeed = ({ filter }) => {
   if (!posts.length) return <p>No posts found</p>
 
   return (
-    <PostsGrid
-      posts={posts}
-      onPostClick={(post) => setSelectedPost(post)}
-    />
+    filter === "following" ? (
+
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "4px",
+      paddingTop: "2rem"
+    }}>
+      {posts.map(p => (
+        <PostCardCompact key={p._id} post={p} />
+      ))}
+    </div>
+
+  ) : (
+    <PostsGrid posts={posts} />
+
+  )
   )
 }
 
