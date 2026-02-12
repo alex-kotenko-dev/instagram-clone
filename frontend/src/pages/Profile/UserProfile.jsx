@@ -5,6 +5,7 @@ import FollowButton from "../../components/FollowMessageButton/FollowButton"
 import PostsGrid from "../../components/PostsGrid/PostsGridComponents"
 import { getUserProfile } from "../../api/usersApi"
 import { getUserPosts } from "../../api/postsApi"
+import MessageButton from "../../components/FollowMessageButton/MessageButton"    
 
 const UserProfile = () => {
   const { id } = useParams()
@@ -21,10 +22,13 @@ const UserProfile = () => {
   return (
     <div>
       <ProfileCard profile={user}>
-        <FollowButton profile={user} setProfile={setUser} />
+        <div style={{ display: "flex", gap: "10px" }}>
+         <FollowButton profile={user} setProfile={setUser} />
+         <MessageButton recipientId={user._id} />
+        </div>
       </ProfileCard>
 
-      <PostsGrid posts={posts} />
+      <PostsGrid posts={posts} currentUserId={user._id}/>
     </div>
   )
 }

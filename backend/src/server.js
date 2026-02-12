@@ -55,13 +55,19 @@ export const io = new Server(server, {
   }
 })
 
+app.use((req, res, next) => {
+  req.io = io
+  next()
+})
+
 io.use((socket, next) => {
   const token = socket.handshake.auth.token
   if (!token) return next(new Error('No token'))
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    socket.userId = decoded.userId
+
+    socket.user = { _id: decoded.userId }
     next()
   } catch (error) {
     next(new Error('Invalid token'))
@@ -69,17 +75,12 @@ io.use((socket, next) => {
 })
 
 io.on('connection', (socket) => {
-  console.log('User connected', socket.userId)
-  socket.join(socket.userId)
+  console.log('User connected', socket.user._id)
+  socket.join(socket.user._id)
 
   socket.on('disconnect', () => {
-    console.log('User disconnect:', socket.userId)
+    console.log('User disconnected', socket.user._id)
   })
-})
-
-app.use((req, res, next) => {
-  req.io = io
-  next()
 })
 
 async function start() {

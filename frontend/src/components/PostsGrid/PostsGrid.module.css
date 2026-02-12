@@ -59,7 +59,6 @@
   height: 20px;
 }
 
-/* Сделаем кнопку LikeButton прозрачной, чтобы можно было кликнуть на overlay */
 .overlayIcon button {
   background: none !important;
   border: none !important;
@@ -67,6 +66,40 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #fff; /* по умолчанию сердце белое, если не красное */
+  color: #fff; 
   font-size: 18px;
+}
+
+
+
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(8rem, 20vw, 12rem), 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(6rem, 40vw, 10rem), 1fr));
+  }
+
+  .overlay {
+    font-size: clamp(12px, 3vw, 16px);
+    gap: 12px;
+  }
+
+  .overlayIcon {
+    gap: 4px;
+  }
+
+  .overlayIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .overlayIcon button {
+    font-size: 14px;
+    gap: 4px;
+  }
 }

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { followUser, unfollowUser, getFollowers } from "../../api/followApi"
 import styles from "./FollowMessageButton.module.css"
-import MessageButton from "./MessageButton"
 
 const FollowButton = ({ profile, setProfile }) => {
   const currentUserId = useSelector(state => state.auth.user?._id)
@@ -54,7 +53,6 @@ const FollowButton = ({ profile, setProfile }) => {
   }
 
   return (
-    <div className={styles.buttons}>
       <button
         onClick={handleClick}
         disabled={loading}
@@ -64,9 +62,6 @@ const FollowButton = ({ profile, setProfile }) => {
       >
         {isFollowing ? (hovering ? "Unfollow" : "Following") : "Follow"}
       </button>
-      
-      <MessageButton recipientId={profile._id} />
-    </div>
   )
 }
 

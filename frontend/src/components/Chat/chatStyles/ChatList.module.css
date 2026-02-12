@@ -1,42 +1,18 @@
 .container {
-  width: 250px;
+  width: 260px;
   border-right: 1px solid #ccc;
-  padding: 10px;
+  overflow-y: auto;
 }
 
-.currentUser {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.usersList {
-  display: flex;
-  flex-direction: column;
-}
-
-.userItem {
-  display: flex;
-  align-items: center;
-  padding: 5px;
+.user {
+  padding: 14px;
   cursor: pointer;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  transition: background 0.2s;
 }
 
-.userItem:hover {
-  background-color: #f0f0f0;
+.user:hover {
+  background: #f2f2f2;
 }
 
-.selected {
-  background-color: #e0e0e0;
-}
-
-.avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
+.active {
+  background: #e0e7ff;
 }

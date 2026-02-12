@@ -11,6 +11,7 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
+    console.log('Token sent:', token)
 
     if (token) {
       API.get('/users/me')

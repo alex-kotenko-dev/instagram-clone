@@ -7,7 +7,7 @@ const MessageButton = ({ recipientId }) => {
   if (!recipientId) return null
 
   const handleClick = () => {
-    navigate('/messages', { state: { userId: recipientId } })
+    navigate(`/messages/${recipientId}`)
   }
 
   return (

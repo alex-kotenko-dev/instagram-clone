@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Comments from "../Comments/CommentsComponents"
 import { deletePost, editPost } from "../../api/postsApi"
@@ -73,7 +73,9 @@ const PostCard = ({ post, currentUserId }) => {
          {isOwner && (
           <button
             className={styles.dots}
-            onClick={() => setShowModal(true)}>
+            onClick={(e) => {
+              e.stopPropagation()
+              setShowModal(true) }}>
             ⋯
           </button>
           )}
@@ -86,7 +88,7 @@ const PostCard = ({ post, currentUserId }) => {
             onChange={(e) => setEditText(e.target.value)}
             className={styles.textarea}
           />
-          <button onClick={handleSave}>Save</button>
+          <button className={styles.saveButton} onClick={handleSave}>Save</button>
         </>
        ) : (
          <p className={styles.text}>{post.text}</p>

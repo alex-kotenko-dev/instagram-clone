@@ -75,19 +75,18 @@ const Comments = ({ postId, postUser }) => {
           </div>
         ))}
       </div>
-
       <div className={styles.iconRow}>
         <LikeButton postId={postId} />
         <CommentCounter postId={postId} />
       </div>
 
       <form onSubmit={submitComment} className={styles.form}>
-        <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+        <div className={styles.inputWrapper}>
 
           <span
             type="button"
             onClick={() => setShowEmoji(prev => !prev)}
-            сlassName={styles.emojiButton}
+            className={styles.emojiButton}
           >
             😀
           </span>

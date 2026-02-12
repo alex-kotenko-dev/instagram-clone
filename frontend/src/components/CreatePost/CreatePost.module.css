@@ -85,3 +85,49 @@
 .uploadPlaceholder {
   cursor: pointer;
 }
+
+
+
+
+@media (max-width: 1024px) {
+  .overlay {
+    width: 32rem; 
+    height: 32rem;
+  }
+
+  .containerRightLeft {
+    flex-direction: column;
+  }
+
+  .left, .right {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #a8a8a8;
+  }
+
+  .right {
+    padding: 1rem;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .overlay {
+    width: 90%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .title {
+    margin-left: 1rem;
+  }
+
+  .textarea {
+    font-size: 0.875rem;
+  }
+
+  .btn {
+    font-size: 0.875rem;
+    padding: 0.6rem;
+  }
+}

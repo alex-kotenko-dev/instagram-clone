@@ -38,7 +38,7 @@ export const AppRoutes = () => {
             <Route path="/profile/edit" element={<EditProfilePage />} />
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/messages" element={<MessagePage />} />
-            {/* <Route path="/messages/:userId" element={<MessagePage />} /> */}
+            <Route path="/messages/:userId" element={<MessagePage />} />            
             <Route path="/posts/:id" element={<PostPage />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

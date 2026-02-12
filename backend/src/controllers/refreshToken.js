@@ -6,7 +6,7 @@ const refreshToken = async (req, res) => {
   if (!token) return res.status(401).json({ message: 'No token provided' })
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET)
+    const decoded = jwt.verify(token, process.env.REFRESH_SECRET)
     const user = await User.findById(decoded.userId)
 
     if (!user || !user.refreshTokens.includes(token)) {

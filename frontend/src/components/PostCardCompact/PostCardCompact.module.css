@@ -16,12 +16,14 @@
   width: 100%;
   height: 15rem;
   object-fit: cover;
+  height: clamp(10rem, 20vw, 15rem)
 }
 
 .body {
   padding: 8px;
   display: flex;
   flex-direction: row;
+  gap: 8px;
   align-items: center;
 }
 

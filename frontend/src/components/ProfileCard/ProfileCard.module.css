@@ -50,3 +50,49 @@
   gap: 6px;
   padding-right: 2rem;
 }
+
+
+
+
+
+@media (max-width: 1024px) {
+  .wrapper {
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  .container {
+    gap: 1.2rem;
+  }
+
+  .contentWrapper {
+    margin-left: 0;
+    gap: 1rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .avatarWrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .wrapper {
+    width: 30rem;
+  }
+
+  .contentWrapper {
+    gap: 0.8rem;
+  }
+
+  .stat {
+    gap: 4px;
+    padding-right: 1rem;
+  }
+}
