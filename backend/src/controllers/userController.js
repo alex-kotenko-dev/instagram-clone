@@ -5,7 +5,6 @@ import Follow from '../models/followModel.js'
 const getUserProfile = async (req, res) => {
   try {
     const id = req.params.id === 'me' || !req.params.id
-    // ? req.user.userId 
     ? req.user._id
     : req.params.id
 

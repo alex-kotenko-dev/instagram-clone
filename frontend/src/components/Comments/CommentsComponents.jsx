@@ -75,6 +75,7 @@ const Comments = ({ postId, postUser }) => {
           </div>
         ))}
       </div>
+      
       <div className={styles.iconRow}>
         <LikeButton postId={postId} />
         <CommentCounter postId={postId} />

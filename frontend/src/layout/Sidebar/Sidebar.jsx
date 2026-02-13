@@ -69,9 +69,13 @@ const Sidebar = ({ openPanel }) => {
         <div className={styles.profile}>
           <NavLink to="/profile" className={navClass}>
             <img
-              src={profile?.avatar && profile.avatar.trim() !== "" ? profile.avatar : "/default-avatar.png"}
-              alt="profile"
-              className={styles.avatar}
+                src={profile?.avatar || "/default-avatar.png"}
+                alt="profile"
+                className={styles.avatar}
+                onError={(e) => {
+                e.target.onerror = null
+                e.target.src = "/default-avatar.png"
+              }}
             />
             <span className={styles.menu}>Profile</span>
           </NavLink>

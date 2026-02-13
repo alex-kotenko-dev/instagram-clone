@@ -62,10 +62,6 @@
   transform: scale(1.1);
 }
 
-/* .active .avatar {
-  box-shadow: 0 0 0 2px #ff5e8e;
-} */
-
 .link:hover .menu,
 .link:hover .icon {
   color: #0095F6;        
