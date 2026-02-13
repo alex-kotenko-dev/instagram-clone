@@ -6,7 +6,7 @@ import { io } from '../server.js'
 
 const followUser = async (req, res) => {
   try {
-    const followerId = req.user.userId
+    const followerId = req.user._id
     const followingId = req.params.id
 
     if (followerId.toString() === followingId.toString()) {
@@ -51,7 +51,7 @@ const followUser = async (req, res) => {
 
 const unfollowUser = async (req, res) => {
   try {
-    const followerId = req.user.userId
+    const followerId = req.user._id
     const followingId = req.params.id
 
     const follow = await Follow.findOneAndDelete({

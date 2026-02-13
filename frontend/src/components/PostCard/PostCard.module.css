@@ -89,3 +89,15 @@
   color: white;
   margin-top: 1rem;
 }
+
+.userBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.userBlock:hover {
+  opacity: 0.7;
+}

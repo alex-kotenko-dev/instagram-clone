@@ -2,6 +2,9 @@
 
  const createPost = async(req, res) => {
   try {
+    const userId = req.user?._id
+    if (!userId) return res.status(401).json({ message: "Unauthorized" })
+
     const text = req.body.text || ""
     let image = ""
 
@@ -14,7 +17,7 @@
       image = `data:${mime};base64,${base64}`
 
     const post = new Post({
-      user: req.user.userId,
+      user: userId,
       text,
       image
     })
@@ -46,9 +49,9 @@
 
     if (!post) {
       return res.status(404).json({ message: 'Post not found' })
-    }
+    } 
 
-    if (post.user.toString() !== req.user.userId) {
+    if (post.user.toString() !== req.user._id) {
       return res.status(403).json({message: 'Not allowed'})
     }
 
@@ -66,9 +69,9 @@
 
     if (!post) {
       return res.status(404).json({ message: 'Post not found' })
-    }
+    } 
 
-    if (post.user.toString() !== req.user.userId) {
+    if (post.user.toString() !== req.user._id) {
       return res.status(403).json({message: 'Not allowed'})
     }
 

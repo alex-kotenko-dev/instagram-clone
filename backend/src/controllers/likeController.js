@@ -7,7 +7,7 @@ import { io } from '../server.js'
  const likePost = async (req, res) => {
   try {
     const postId = req.params.id
-    const userId = req.user.userId
+    const userId = req.user._id
 
     const post = await Post.findById(postId)
 
@@ -25,7 +25,7 @@ import { io } from '../server.js'
       post: postId
     })
 
-    if (post.user.toString() !== userId) {
+    if (post.user.toString() !== userId.toString) {
       const notification = await Notification.create({
         user: post.user, 
         fromUser: userId,
@@ -46,9 +46,10 @@ import { io } from '../server.js'
  const unlikePost = async (req, res) => {
    try {
      const postId = req.params.id
-     const userId = req.user.userId
+     const userId = req.user._id
 
      const like = await Like.findOneAndDelete({post: postId, user: userId})
+     if (!like) return res.status(404).json({ message: 'Like not found' })
  
      if (!like) {
        return res.status(404).json({message:'Like not found'})

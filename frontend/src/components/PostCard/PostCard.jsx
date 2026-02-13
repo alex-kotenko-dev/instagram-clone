@@ -12,16 +12,16 @@ const PostCard = ({ post, currentUserId }) => {
   const [loading, setLoading] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [showModal, setShowModal] = useState(false)
-  const [text, setText] = useState(post.text) // локальное состояние текста
-  const [deleted, setDeleted] = useState(false) // состояние удаления
+  const [text, setText] = useState(post.text) 
+  const [deleted, setDeleted] = useState(false) 
 
-  if (deleted) return null // скрываем компонент после удаления
+  if (deleted) return null 
 
   const handleDelete = async () => {
     setLoading(true)
     try {
       await deletePost(post._id)
-      setDeleted(true) // локально скрываем пост
+      setDeleted(true) 
     } finally {
       setLoading(false)
       setShowModal(false)
@@ -56,7 +56,10 @@ const PostCard = ({ post, currentUserId }) => {
 
       <div className={styles.right}>
         <div className={styles.header}>
-          <div className={styles.userBlock}>
+
+          <div className={styles.userBlock}
+            onClick={() => navigate(`/profile/${post.user?._id}`)}
+          >
             {post.user?.avatar && (
               <img src={post.user.avatar} alt="" className={styles.avatar} />
             )}

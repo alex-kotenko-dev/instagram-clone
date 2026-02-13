@@ -2,7 +2,7 @@ import Notification from '../models/notificationModel.js'
 
 const getNotifications = async (req, res) => {
   try {
-    const userId = req.user.userId
+    const userId = req.user._id
 
     const notifications = await Notification.find({ user: userId })
       .populate('fromUser', 'username fullname avatar')
@@ -18,14 +18,15 @@ const getNotifications = async (req, res) => {
 const markAsRead = async (req, res) => {
   try {
     const { id } = req.params
+    const userId = req.user._id.toString()
 
     const notification = await Notification.findByIdAndUpdate(
       id,
       { isRead: true },
-      { new: true }
+      { new: true } 
     )
 
-    if (!notification) {
+    if (!notification.user.toString() === userId) {
       return res.status(404).json({ message: 'Notification not found' })
     }
 
@@ -39,7 +40,7 @@ const markAsRead = async (req, res) => {
 const deleteNotification = async (req, res) => {
   try {
     const { id } = req.params
-    const userId = req.user.userId
+    const userId = req.user._id
 
     const notification = await Notification.findById(id)
 

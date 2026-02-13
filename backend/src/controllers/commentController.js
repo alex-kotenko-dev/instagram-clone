@@ -11,9 +11,12 @@ const commentPost = async (req, res) => {
     if (!post) {
       return res.status(404).json({ message: 'Post not found' })
     } 
+
+    const userId = req.user._id
+    if (!userId) return res.status(401).json({ message: 'Unauthorized' })
     
     const comment = await Comment.create({
-      user: req.user.userId,
+      user: userId,
       post: req.params.id,
       text: req.body.text
     })
@@ -21,7 +24,7 @@ const commentPost = async (req, res) => {
     if (post.user.toString() !== req.user.userId) {
       const notification = await Notification.create({
         user: post.user,
-        fromUser: req.user.userId,
+        fromUser: userId,
         type: 'comment',
         post: post._id
     })
