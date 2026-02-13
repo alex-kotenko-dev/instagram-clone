@@ -31,6 +31,7 @@ export const login = createAsyncThunk(
 const initialState = {
   user: null,
   token: null,
+  refreshToken: null,
   loading: false,
   error: null,
   isAuth: false,
@@ -44,10 +45,12 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null
       state.token = null
+      state.refreshToken = null
       state.isAuth = false
       state.authChecked = true
       state.error = null
       localStorage.removeItem('token')
+      localStorage.removeItem('refreshToken')
     },
 
     clearError: (state) => {
@@ -57,6 +60,7 @@ const authSlice = createSlice({
     setCredentials: (state, action) => {
       state.user = action.payload.user
       state.token = action.payload.token
+      state.refreshToken = action.payload.refreshToken
       state.isAuth = true
       state.authChecked = true
     }
@@ -73,9 +77,11 @@ const authSlice = createSlice({
       state.loading = false
       state.user = action.payload.user
       state.token = action.payload.token
+      state.refreshToken = action.payload.refreshToken
       state.isAuth = true
       state.authChecked = true
       localStorage.setItem('token', action.payload.token)
+      localStorage.setItem('refreshToken', action.payload.refreshToken)
     })
     .addCase(register.rejected, (state, action) => {
       state.loading = false
@@ -91,9 +97,11 @@ const authSlice = createSlice({
       state.loading = false
       state.user = action.payload.user
       state.token = action.payload.token
+      state.refreshToken = action.payload.refreshToken
       state.isAuth = true
       state.authChecked = true  
       localStorage.setItem('token', action.payload.token)
+      localStorage.setItem('refreshToken', action.payload.refreshToken)
     })
     .addCase(login.rejected, (state, action) => {
       state.loading = false

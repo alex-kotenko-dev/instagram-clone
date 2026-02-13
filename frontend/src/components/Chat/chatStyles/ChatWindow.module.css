@@ -1,34 +1,164 @@
 .container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.sidebarTitle {
+  margin: 0 0 10px 0;
+}
+
+.chatArea {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.chatHeader {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 .messages {
-  flex: 1;
-  border: 1px solid #ccc;
+  flex: 1; 
   overflow-y: auto;
-  margin-bottom: 10px;
   padding: 10px;
+  display: flex;
+  flex-direction: column; 
+  gap: 8px;
 }
 
-.row {
-  display: flex;
+.messageLeft {
+  text-align: left;
   margin-bottom: 8px;
 }
 
-.myRow {
-  justify-content: flex-end;
+.messageRight {
+  text-align: right;
+  margin-bottom: 8px;
 }
 
-.theirRow {
-  justify-content: flex-start;
+.messageText {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-break: break-word;
+  background-color: #EFEFEF;
+  font-size: 16px;
+  padding: 12px;
 }
 
-.message {
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: #e5e5e5;
-  max-width: 60%;
+.messageRight .messageText {
+  background-color: #4D00FF;
+  color: white;
+}
+
+.inputArea {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  width: 45rem;
+  padding: 1.3rem;
+  border-radius: 22px;
+  border: 1px solid #DBDBDB;
+}
+
+.sendButton {
+  padding: 6px 10px;
+  border: 1px solid #DBDBDB;
+  border-radius: 16px;
+  background-color: transparent;
+  color: #4D00FF;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+
+.chatHeader {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userName {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.messageLeft .messageAvatar {
+  display: block;
+}
+
+.messageRight .messageAvatar {
+  display: none;
+}
+
+
+.myInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.myAvatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.myAvatarWrapper {
+  width: 4rem;     
+  height: 4rem;
+  border-radius: 50%; 
+  padding: 4px;      
+  background: linear-gradient(
+    45deg,
+    #feda75,
+    #fa7e1e,
+    #d62976,
+    #962fbf,
+    #4f5bd5
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myName {
+  font-weight: bold;
+  font-size: 16px;
 }

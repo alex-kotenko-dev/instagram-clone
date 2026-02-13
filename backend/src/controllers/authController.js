@@ -11,7 +11,7 @@ const registerUser = async (req, res) => {
     const user = new User({username, email, password, fullname})
     await user.save()
 
-    const accessToken = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {expiresIn: '5h'})
+    const accessToken = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {expiresIn: '1h'})
     const refreshToken = jwt.sign({userId: user._id}, process.env.REFRESH_SECRET, {expiresIn: '7d'})
 
     const userData = user.toObject()

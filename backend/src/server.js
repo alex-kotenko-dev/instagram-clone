@@ -78,6 +78,19 @@ io.on('connection', (socket) => {
   console.log('User connected', socket.user._id)
   socket.join(socket.user._id)
 
+  socket.on('sendMessage', (data) => {
+
+    const { recipient, text } = data
+    const message = {
+      sender: socket.user._id,
+      recipient,
+      text,
+      createdAt: new Date()
+    }
+
+    io.to(recipient).emit('receiveMessage', message)
+  })
+
   socket.on('disconnect', () => {
     console.log('User disconnected', socket.user._id)
   })

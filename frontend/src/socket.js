@@ -24,30 +24,18 @@
 
 
 
-import { io } from "socket.io-client"
+
+import { io } from 'socket.io-client'
 
 let socket
 
 export const connectSocket = (token) => {
-  if (!socket) {
-    socket = io("http://localhost:5000", {
-      auth: { token },       
-      transports: ["websocket"], 
-      reconnection: true,
-    })
+  socket = io('http://localhost:5000', {
+    auth: { token }
+  })
 
-    socket.on("connect", () => {
-      console.log("Connected to socket", socket.id)
-    })
-
-    socket.on("disconnect", (reason) => {
-      console.log("Disconnected from socket:", reason)
-    })
-
-    socket.on("connect_error", (err) => {
-      console.error("Socket connect error:", err.message)
-    })
-  }
+  socket.on('connect', () => console.log('Connected to socket', socket.id))
+  socket.on('disconnect', () => console.log('Disconnected from socket'))
 
   return socket
 }

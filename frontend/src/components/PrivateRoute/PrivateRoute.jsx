@@ -9,7 +9,7 @@ const PrivateRoute = () => {
   }
 
   if (!isAuth) {
-    return <Navigate to="auth/login" replace/>
+    return <Navigate to="/auth/login" replace/>
   }
 
   return <Outlet/>

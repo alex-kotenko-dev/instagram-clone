@@ -5,7 +5,8 @@ import Follow from '../models/followModel.js'
 const getUserProfile = async (req, res) => {
   try {
     const id = req.params.id === 'me' || !req.params.id
-    ? req.user.userId
+    // ? req.user.userId 
+    ? req.user._id
     : req.params.id
 
     if (!id) {
@@ -35,7 +36,7 @@ const getUserProfile = async (req, res) => {
 
 const updateUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId)
+    const user = await User.findById(req.user._id)
 
     if (!user) {
       return res.status(404).json({message: 'User not found'})

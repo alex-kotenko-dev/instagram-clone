@@ -38,45 +38,106 @@
 
 
 
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { AppRoutes } from './routes/AppRoutes'
-import { logout, setCredentials } from './redux/slices/authSlice'
-import { connectSocket } from './socket'
-import API from './api/api'
+// import { useEffect } from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { AppRoutes } from './routes/AppRoutes'
+// import { logout, setCredentials } from './redux/slices/authSlice'
+// import { connectSocket } from './socket'
+// import API from './api/api'
+
+// function App() {
+//   const dispatch = useDispatch()
+
+//   useEffect(() => {
+//     const checkAuthAndConnect = async () => {
+//       const token = localStorage.getItem('token')
+
+//       if (!token) {
+//         dispatch(logout())
+//         return
+//       }
+
+//       try {
+//         const res = await API.get('/users/me')
+
+//         dispatch(setCredentials({
+//           user: res.data,
+//           token
+//         }))
+
+//         connectSocket(token)
+
+//       } catch (error) {
+//         dispatch(logout())
+//       }
+//     }
+
+//     checkAuthAndConnect()
+//   }, [dispatch])
+
+//   return <AppRoutes />
+// }
+
+// export default App
+
+
+
+
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { AppRoutes } from "./routes/AppRoutes";
+import { logout, setCredentials } from "./redux/slices/authSlice";
+import { connectSocket } from "./socket";
+import API from "./api/api";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);  // состояние загрузки
+  const [error, setError] = useState(null);      // состояние ошибки
 
   useEffect(() => {
     const checkAuthAndConnect = async () => {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem("token");
 
-      if (token) {
-        try {
-
-          const res = await API.get('/users/me')
-          dispatch(setCredentials({ user: res.data, token }))
-
-
-          const socket = connectSocket(token)
-
-          socket.on("connect", () => console.log("Socket connected", socket.id))
-          socket.on("disconnect", (reason) => console.log("Socket disconnected", reason))
-          socket.onAny((event, data) => console.log("Socket event:", event, data))
-
-        } catch (err) {
-          dispatch(logout()) 
-        }
-      } else {
-        dispatch(logout())
+      if (!token) {
+        dispatch(logout());
+        setLoading(false);
+        return;
       }
-    }
 
-    checkAuthAndConnect()
-  }, [dispatch])
+      try {
+        // Проверяем токен на сервере
+        const res = await API.get("/users/me", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-  return <AppRoutes />
+        // Сохраняем пользователя в Redux
+        dispatch(
+          setCredentials({
+            user: res.data,
+            token,
+          })
+        );
+
+        // Подключаем сокет
+        connectSocket(token);
+
+      } catch (err) {
+        console.error("Auth check failed:", err.response?.data || err.message);
+        setError(err.response?.data?.message || err.message);
+        dispatch(logout());
+      } finally {
+        setLoading(false); // снимаем состояние загрузки
+      }
+    };
+
+    checkAuthAndConnect();
+  }, [dispatch]);
+
+  if (loading) return <div>Loading app...</div>;
+  if (error) return <div style={{ color: "red" }}>Error: {error}</div>;
+
+  return <AppRoutes />;
 }
 
-export default App
+export default App;
