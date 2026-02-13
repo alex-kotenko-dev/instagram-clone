@@ -30,7 +30,7 @@ const PostCardCompact = ({ post }) => {
            className={styles.avatar}
            />
          )}
-         <span>{post.user?.username}</span>
+         <span className={styles.userName}>{post.user?.username}</span>
        </div>
 
         <LikeButton postId={post._id} />

@@ -32,6 +32,12 @@
   margin-bottom: 10px;
 }
 
+.userName {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
 .dots {
   background: none;
   border: none;
@@ -43,11 +49,6 @@
   margin-bottom: 12px;
 }
 
-.userBlock {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 
 .avatar {
   width: 32px;
@@ -61,15 +62,9 @@
   flex-direction: row;
   align-items: center;
   gap: 6px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
-}
-
-.avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  object-fit: cover;
+  font-size: 20px;
 }
 
 
@@ -80,7 +75,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 8px;
-  font-size: 14px;
+  font-size: 16px;
 } 
 
 .saveButton {

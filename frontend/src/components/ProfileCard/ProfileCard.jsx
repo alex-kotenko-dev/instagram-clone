@@ -13,17 +13,17 @@ const ProfileCard = ({ profile, children }) => {
       <div className={style.container}>
       <div className={style.stat}>
         <b>{profile.postsCount || 0}</b>
-        <span>posts</span>
+        <span className={style.statLabel}>posts</span>
       </div>
 
       <div className={style.stat}>
         <b>{profile.followersCount || 0}</b>
-        <span>followers</span>
+        <span className={style.statLabel}>followers</span>
       </div>
 
       <div className={style.stat}>
         <b>{profile.followingCount || 0}</b>
-        <span>following</span>
+        <span className={style.statLabel}>following</span>
       </div>
       </div>
 

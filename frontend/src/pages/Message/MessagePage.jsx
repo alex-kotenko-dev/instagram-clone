@@ -49,22 +49,32 @@ const MessagePage = () => {
 
 
   useEffect(() => {
-    const socket = getSocket()
-    if (!socket || !selectedUser) return
+  const socket = getSocket()
+  if (!socket) return
+  if (!selectedUser) return
 
-    const handleReceive = (message) => {
-      if (
-        message.sender === selectedUser._id ||
-        message.sender === currentUser._id
-      ) {
-        setMessages(prev => [...prev, message])
-      }
+  const handleReceive = (message) => {
+    console.log("Message received:", message)
+    if (message.sender === selectedUser._id || message.sender === currentUser._id) {
+      setMessages(prev => [...prev, message])
     }
+  }
 
+  const subscribe = () => {
+    console.log("Subscribing to receiveMessage")
     socket.on("receiveMessage", handleReceive)
-    return () => socket.off("receiveMessage", handleReceive)
-  }, [selectedUser, currentUser])
+  }
 
+  if (socket.connected) {
+    subscribe()
+  } else {
+    socket.once("connect", subscribe)
+  }
+
+  return () => {
+    socket.off("receiveMessage", handleReceive)
+  }
+}, [selectedUser, currentUser])
 
   const handleSend = async (text) => {
     if (!text.trim() || !selectedUser) return

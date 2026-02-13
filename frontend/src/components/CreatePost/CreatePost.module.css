@@ -65,6 +65,7 @@
   border: none;
   outline: none;
   font-size: 1rem;
+  font-size: 16px;
 }
 
 .error {
@@ -75,7 +76,7 @@
 .btn {
   background-color: transparent;
   font-weight: 550;
-  font-size: 14px;
+  font-size: 16px;
   color: #0095F6;
   border: none;
   cursor: pointer;

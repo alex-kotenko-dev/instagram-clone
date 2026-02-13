@@ -63,7 +63,7 @@ const CreatePost = ({ onPostCreated, closePanel }) => {
   <div className={style.overlay}>
     <form className={style.createForm} onSubmit={handleSubmit}>
      <div className={style.top}>
-       <h4 className={style.title}>Create new post</h4>
+       <h3 className={style.title}>Create new post</h3>
        <button
         type="submit"
         className={style.btn}

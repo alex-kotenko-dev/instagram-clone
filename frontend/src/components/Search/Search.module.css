@@ -5,7 +5,7 @@
 }
 
 .input {
-  width: 100%;
+  width: 90%;
   padding: 0.7rem;
   font-size: 1rem;
   border: none;
@@ -16,7 +16,7 @@
 
 .clearIcon {
   position: absolute;
-  right: 0.5rem;
+  right: 1.7rem;
   top: 65%;
   transform: translateY(-35%);
   cursor: pointer;
@@ -27,4 +27,10 @@
   padding-top: 8px;
   font-weight: 600;
   color: #7c7979;
+}
+
+.userName {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
 }

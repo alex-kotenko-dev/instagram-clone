@@ -5,6 +5,7 @@
   cursor: pointer;
   background: white;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
 }
 
 .card:hover {
@@ -17,6 +18,12 @@
   height: 15rem;
   object-fit: cover;
   height: clamp(10rem, 20vw, 15rem)
+}
+
+.userName {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
 }
 
 .body {

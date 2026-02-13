@@ -65,7 +65,7 @@ const PostCard = ({ post, currentUserId }) => {
           className={styles.avatar}
          />
         )}
-        <div>
+        <div className={styles.username}>
          {post.user?.username || "Deleted profile"}
         </div>
       </div>

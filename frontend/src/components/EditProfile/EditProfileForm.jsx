@@ -91,6 +91,7 @@ const EditProfileForm = () => {
                 accept="image/*"
                 hidden
                 onChange={handleAvatarChange}
+                style={{ display: "none" }}
               />
             </label>
           </div>

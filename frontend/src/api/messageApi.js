@@ -6,7 +6,7 @@ export const getMessages = async (userId) => {
 }
 
 export const sendMessage = async (recipient, text) => {
-  const res = await API.post('/messages', { recipient: userId, text })
+  const res = await API.post('/messages', { recipient, text })
   return res.data
 }
 

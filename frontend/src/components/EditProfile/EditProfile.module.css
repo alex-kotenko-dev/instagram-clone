@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+.editButton:hover {
+  background-color: #E0E0E0;
+}
+
 .wrapperEdit {
   margin: 2rem;
 }
@@ -74,6 +78,10 @@
   width: 16.5rem;
   border: none;
   cursor: pointer;
+}
+
+.btnSave:hover {
+  background-color: #0077cc;
 }
 
 .buttonsEdit {
